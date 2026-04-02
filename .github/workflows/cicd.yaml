@@ -59,7 +59,7 @@ jobs:
             export $(grep -v '^#' .env | xargs)
 
             services=(
-              product-catalog product-reviews quote react-native-app
+              react-native-app
               recommendation shipping
             )
 
@@ -75,13 +75,22 @@ jobs:
 
               # 4. Build with Build Args
               # We explicitly pass the version variables so the Dockerfile "ARG" lines can catch them
-              docker build -t "$service:$BUILD_ID" \
+              
+              if [ "$service" == "react-native-app" ]; then
+                # React Native often needs the .env file present during build time 
+                # to "bake" variables into the javascript bundle.
+                docker build -t "$service:$BUILD_ID" \
+                -f "./src/$service/android.Dockerfile" ./src/$service
+              else
+                docker build -t "$service:$BUILD_ID" \
                 --build-arg "OTEL_JAVA_AGENT_VERSION=$OTEL_JAVA_AGENT_VERSION" \
                 --build-arg "IMAGE_VERSION=$IMAGE_VERSION" \
                 --build-arg "AD_PORT=$AD_PORT" \
                 --build-arg "OPENTELEMETRY_CPP_VERSION=$OPENTELEMETRY_CPP_VERSION" \
                 --build-arg "OPENSEARCH_IMAGE"="$OPENSEARCH_IMAGE" \
-                -f "./src/$service/Dockerfile" .
+                -f "./src/$service/Dockerfile" ./src/$service               
+              fi
+        
 
               # 5. Tag and Push
               docker tag "$service:$BUILD_ID" "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
