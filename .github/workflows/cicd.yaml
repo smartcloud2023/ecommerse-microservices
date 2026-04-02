@@ -59,7 +59,6 @@ jobs:
             export $(grep -v '^#' .env | xargs)
 
             services=(
-              opensearch payment postgresql
               product-catalog product-reviews quote react-native-app
               recommendation shipping
             )
