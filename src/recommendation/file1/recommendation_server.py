@@ -27,12 +27,12 @@ from openfeature.contrib.hook.opentelemetry import TracingHook
 
 # Local
 import logging
-import demo_pb2
-import demo_pb2_grpc
+import recommendation.file1.demo_pb2 as demo_pb2
+import recommendation.file1.demo_pb2_grpc as demo_pb2_grpc
 from grpc_health.v1 import health_pb2
 from grpc_health.v1 import health_pb2_grpc
 
-from metrics import (
+from recommendation.file1.metrics import (
     init_metrics
 )
 

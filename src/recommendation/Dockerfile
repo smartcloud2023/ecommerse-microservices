@@ -47,7 +47,7 @@ RUN python -m venv /venv
 
 # 2. Copy only requirements first to leverage Docker cache
 # Use relative paths (no leading slash) since build context is the repo root
-COPY src/recommendation/requirements.txt .
+COPY ./file1/requirements.txt .
 
 # 3. Install dependencies and OpenTelemetry instrumentation
 RUN /venv/bin/pip install --no-cache-dir --upgrade pip && \
@@ -55,7 +55,7 @@ RUN /venv/bin/pip install --no-cache-dir --upgrade pip && \
     /venv/bin/opentelemetry-bootstrap -a install
 
 # 4. Copy the application source code into the build stage
-COPY src/recommendation/ .
+COPY ./file1 .
 
 # --- Stage 2: Final Runtime Stage ---
 FROM docker.io/library/python:3.14-alpine3.23
