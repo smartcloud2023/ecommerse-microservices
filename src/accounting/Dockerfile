@@ -5,10 +5,10 @@ FROM --platform=${BUILDPLATFORM} mcr.microsoft.com/dotnet/sdk:10.0 AS builder
 ARG TARGETARCH
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/accounting/", "Accounting/"]
+COPY ["./*", "Accounting/"]
 RUN ls -la Accounting
 #RUN mkdir -p Accounting/src/protos && mv proto/demo.proto Accounting/src/protos/demo.proto
-COPY ["src/accounting/proto/demo.proto", "Accounting/src/protos/demo.proto"]
+COPY ["/proto/demo.proto", "Accounting/src/protos/demo.proto"]
 RUN dotnet restore "./Accounting/Accounting.csproj" -r linux-$TARGETARCH
 WORKDIR "/src/Accounting"
 

@@ -36,10 +36,10 @@ jobs:
       - name: Create ECR repository if needed
         run: |
             repos=(
-            accounting ad cart checkout currency email flagd flagd-ui fraud-detection
-            frontend frontend-proxy grafana image-provider jaeger kafka llm
-            load-generator opensearch otel-collector payment postgresql
-            product-catalog product-reviews prometheus quote react-native-app
+            accounting ad cart checkout currency email flagd-ui fraud-detection
+            frontend frontend-proxy image-provider kafka llm
+            load-generator opensearch payment
+            product-catalog product-reviews quote react-native-app
             recommendation shipping
             )
 
