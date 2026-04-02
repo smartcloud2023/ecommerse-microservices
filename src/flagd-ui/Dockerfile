@@ -63,7 +63,9 @@ RUN mix assets.deploy
 # Compile the release
 RUN mix compile
 
-COPY ./src/flagd-ui/rel rel
+RUN git clone -b main https://github.com/open-telemetry/opentelemetry-demo.git | cd opentelemetry-demo && cp -r ./src/flagd-ui/rel ./rel
+RUN rm -rf opentelemetry-demo
+#COPY ./src/flagd-ui/rel rel
 RUN mix release
 
 # start a new build stage so that the final image will only contain
