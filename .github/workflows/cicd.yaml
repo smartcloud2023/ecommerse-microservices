@@ -59,7 +59,7 @@ jobs:
             export $(grep -v '^#' .env | xargs)
 
             services=(
-              currency email flagd-ui fraud-detection
+              flagd-ui fraud-detection
               frontend frontend-proxy grafana image-provider jaeger kafka llm
               load-generator opensearch otel-collector payment postgresql
               product-catalog product-reviews prometheus quote react-native-app
