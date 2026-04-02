@@ -59,8 +59,7 @@ jobs:
             export $(grep -v '^#' .env | xargs)
 
             services=(
-              image-provider kafka llm
-              load-generator opensearch payment postgresql
+              opensearch payment postgresql
               product-catalog product-reviews quote react-native-app
               recommendation shipping
             )
@@ -82,6 +81,7 @@ jobs:
                 --build-arg "IMAGE_VERSION=$IMAGE_VERSION" \
                 --build-arg "AD_PORT=$AD_PORT" \
                 --build-arg "OPENTELEMETRY_CPP_VERSION=$OPENTELEMETRY_CPP_VERSION" \
+                --build-arg "OPENSEARCH_IMAGE"="$OPENSEARCH_IMAGE" \
                 -f "./src/$service/Dockerfile" .
 
               # 5. Tag and Push
