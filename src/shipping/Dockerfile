@@ -21,6 +21,9 @@ RUN apt-get update && \
 WORKDIR /app/
 
 COPY ./* /app/
+COPY ./src/ ./src/
+COPY ./src/shipping_service/ ./src/shipping_service/
+
 
 # Build - cross-compile for ARM64 or native build
 RUN if [ "${TARGETPLATFORM}" = "linux/arm64" ] && [ "${BUILDPLATFORM}" != "linux/arm64" ] ; then \
