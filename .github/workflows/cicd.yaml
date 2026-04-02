@@ -54,8 +54,11 @@ jobs:
             echo "${{ vars.ENV_FILE }}" > .env 
             export $(grep -v '^#' .env | xargs) 
 
+            #accounting
+
+
             services=(
-            accounting ad cart checkout currency email flagd flagd-ui fraud-detection
+            ad cart checkout currency email flagd flagd-ui fraud-detection
             frontend frontend-proxy grafana image-provider jaeger kafka llm
             load-generator opensearch otel-collector payment postgresql
             product-catalog product-reviews prometheus quote react-native-app
