@@ -8,7 +8,7 @@ on:
     
 
 jobs:
-  build-cart:
+  build-and-push-images-to-ECR:
     runs-on: ubuntu-latest
 
     steps:
