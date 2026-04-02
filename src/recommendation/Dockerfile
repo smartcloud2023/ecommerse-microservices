@@ -7,7 +7,7 @@ FROM docker.io/library/python:3.14-alpine3.23 AS build-venv
 RUN apk update && \
     apk add gcc g++ linux-headers
 
-COPY ./src/recommendation/*  .
+ADD ./src/recommendation/*  ./
 
 RUN python -m venv venv && \
     venv/bin/pip install --no-cache-dir -r requirements.txt
