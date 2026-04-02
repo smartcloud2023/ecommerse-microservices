@@ -65,7 +65,7 @@ RUN mix compile
 
 
 RUN mkdir -p rel/overlays/bin
-COPY ./src/file1/overlays1/bin1 rel/overlays/bin
+COPY ./src/flagd-ui/file1/overlays1/bin1 rel/overlays/bin
 #COPY ./src/flagd-ui/rel rel
 RUN mix release
 
