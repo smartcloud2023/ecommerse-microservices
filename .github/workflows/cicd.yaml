@@ -49,13 +49,20 @@ jobs:
             done
 
 
-        # # Build and push Docker images
-        # #============================
-        # - name: Build and push Docker images
-        #   run: |
-        #     for service in accounting ad cart checkout currency email flagd flagd-ui fraud-detection frontend frontend-proxy grafana image-provider jaeger kafka llm load-generator opensearch otel-collector payment postgresql product-catalog product-reviews prometheus quote react-native-app recommendation shipping; do
-        #       echo "Building and pushing $service..."
-        #       docker build -t $service:latest ./src/$service
-        #       docker tag $service:latest ${{ steps.login-ecr.outputs.registry }}/${{ steps.login-ecr.outputs.repository }}:$service-latest
-        #       docker push ${{ steps.login-ecr.outputs.registry }}/${{ steps.login-ecr.outputs.repository }}:$service-latest
-        #     done
+      - name: Build and push Docker images
+        run: |
+            services=(
+            accounting ad cart checkout currency email flagd flagd-ui fraud-detection
+            frontend frontend-proxy grafana image-provider jaeger kafka llm
+            load-generator opensearch otel-collector payment postgresql
+            product-catalog product-reviews prometheus quote react-native-app
+            recommendation shipping
+            )
+            # Use GitHub Actions run number as build ID
+            export BUILD_ID=${GITHUB_RUN_NUMBER}
+            for service in "${services[@]}"; do
+            echo "Building and pushing $service..."
+            docker build -t "$service:$BUILD_ID" "./src/$service"
+            docker tag "$service:$BUILD_ID" "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
+            docker push "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
+            done
