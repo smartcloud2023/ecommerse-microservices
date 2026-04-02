@@ -7,7 +7,7 @@ FROM docker.io/library/python:3.14-alpine3.23 AS build-venv
 RUN apk update && \
     apk add gcc g++ linux-headers
 WORKDIR /app/
-COPY /src/recommendation /app/
+COPY /src/recommendation/ /app/
 # COPY ./src/recommendation/requirements.txt requirements.txt
 # COPY ./src/recommendation/ .
 
