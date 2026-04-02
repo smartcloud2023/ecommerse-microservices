@@ -56,15 +56,16 @@ COPY ./src/flagd-ui/priv priv
 COPY ./src/flagd-ui/lib lib
 
 COPY ./src/flagd-ui/assets assets
-
+COPY ./src/flagd-ui/assets/vendor1 assets/vendor
 # compile assets
 RUN mix assets.deploy
 
 # Compile the release
 RUN mix compile
 
-RUN git clone -b main https://github.com/open-telemetry/opentelemetry-demo.git | cd opentelemetry-demo && cp -r ./src/flagd-ui/rel ./rel
-RUN rm -rf opentelemetry-demo
+
+RUN mkdir -p rel/overlays/bin
+COPY ./src/file1/overlays1/bin1 rel/overlays/bin
 #COPY ./src/flagd-ui/rel rel
 RUN mix release
 
