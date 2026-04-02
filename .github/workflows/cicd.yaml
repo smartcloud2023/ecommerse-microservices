@@ -51,26 +51,40 @@ jobs:
 
       - name: Build and push Docker images
         run: |
+            # 1. Create the .env file from the GitHub Variable
             echo "${{ vars.ENV_FILE }}" > .env 
-            export $(grep -v '^#' .env | xargs) 
 
-            #accounting
-
+            # 2. Load the variables into the current shell session
+            # This allows us to use $OTEL_JAVA_AGENT_VERSION etc. in the docker command
+            export $(grep -v '^#' .env | xargs)
 
             services=(
-            ad cart checkout currency email flagd flagd-ui fraud-detection
-            frontend frontend-proxy grafana image-provider jaeger kafka llm
-            load-generator opensearch otel-collector payment postgresql
-            product-catalog product-reviews prometheus quote react-native-app
-            recommendation shipping
+              ad cart checkout currency email flagd flagd-ui fraud-detection
+              frontend frontend-proxy grafana image-provider jaeger kafka llm
+              load-generator opensearch otel-collector payment postgresql
+              product-catalog product-reviews prometheus quote react-native-app
+              recommendation shipping
             )
-            # Use GitHub Actions run number as build ID
+
             export BUILD_ID=${GITHUB_RUN_NUMBER}
+
             for service in "${services[@]}"; do
-            echo "Building and pushing $service..."
-            cp .env "./src/$service/.env"
-            ls -la
-            docker build -t "$service:$BUILD_ID" -f "./src/$service/Dockerfile" .
-            docker tag "$service:$BUILD_ID" "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
-            docker push "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
+              echo "------------------------------------------"
+              echo "Processing service: $service"
+              echo "------------------------------------------"
+
+              # 3. Copy .env into the service folder so the Dockerfile can COPY it if needed
+              cp .env "./src/$service/.env"
+
+              # 4. Build with Build Args
+              # We explicitly pass the version variables so the Dockerfile "ARG" lines can catch them
+              docker build -t "$service:$BUILD_ID" \
+                --build-arg "OTEL_JAVA_AGENT_VERSION=$OTEL_JAVA_AGENT_VERSION" \
+                --build-arg "IMAGE_VERSION=$IMAGE_VERSION" \
+                --build-arg "AD_PORT=$AD_PORT" \
+                -f "./src/$service/Dockerfile" .
+
+              # 5. Tag and Push
+              docker tag "$service:$BUILD_ID" "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
+              docker push "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
             done
