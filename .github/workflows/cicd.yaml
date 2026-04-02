@@ -62,7 +62,7 @@ jobs:
             export BUILD_ID=${GITHUB_RUN_NUMBER}
             for service in "${services[@]}"; do
             echo "Building and pushing $service..."
-            docker build -t "$service:$BUILD_ID" "./src/$service"
+            docker build -t "$service:$BUILD_ID" -f "./src/$service/Dockerfile" .
             docker tag "$service:$BUILD_ID" "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
             docker push "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
             done
