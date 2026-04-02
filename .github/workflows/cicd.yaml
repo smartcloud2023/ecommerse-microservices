@@ -35,5 +35,32 @@ jobs:
       #==========================
       - name: Create ECR repository if needed
         run: |
-          aws ecr describe-repositories --repository-names cart || \
-          aws ecr create-repository --repository-name cart
+          aws ecr describe-repositories --repository-names accounting || \ && aws ecr create-repository --repository-name accounting
+          aws ecr describe-repositories --repository-names ad || \ && aws ecr create-repository --repository-name ad
+          aws ecr describe-repositories --repository-names cart || \ && aws ecr create-repository --repository-name cart
+          aws ecr describe-repositories --repository-names checkout || \ && aws ecr create-repository --repository-name checkout
+          aws ecr describe-repositories --repository-names currency || \ && aws ecr create-repository --repository-name currency
+          aws ecr describe-repositories --repository-names email || \ && aws ecr create-repository --repository-name email
+          aws ecr describe-repositories --repository-names flagd || \ && aws ecr create-repository --repository-name flagd
+          aws ecr describe-repositories --repository-names flagd-ui || \ && aws ecr create-repository --repository-name flagd-ui
+          aws ecr describe-repositories --repository-names fraud-detection || \ && aws ecr create-repository --repository-name fraud-detection
+          aws ecr describe-repositories --repository-names frontend || \ && aws ecr create-repository --repository-name frontend
+          aws ecr describe-repositories --repository-names frontend-proxy || \ && aws ecr create-repository --repository-name frontend-proxy
+          aws ecr describe-repositories --repository-names grafana || \ && aws ecr create-repository --repository-name grafana
+          aws ecr describe-repositories --repository-names image-provider || \ && aws ecr create-repository --repository-name image-provider
+          aws ecr describe-repositories --repository-names jaeger || \ && aws ecr create-repository --repository-name jaeger
+          aws ecr describe-repositories --repository-names kafka || \ && aws ecr create-repository --repository-name kafka
+          aws ecr describe-repositories --repository-names llm || \ && aws ecr create-repository --repository-name llm
+          aws ecr describe-repositories --repository-names load-generator || \ && aws ecr create-repository --repository-name load-generator
+          aws ecr describe-repositories --repository-names opensearch || \ && aws ecr create-repository --repository-name opensearch
+          aws ecr describe-repositories --repository-names otel-collector || \ && aws ecr create-repository --repository-name otel-collector
+          aws ecr describe-repositories --repository-names payment || \ && aws ecr create-repository --repository-name payment
+          aws ecr describe-repositories --repository-names postgresql || \ && aws ecr create-repository --repository-name postgresql
+          aws ecr describe-repositories --repository-names product-catalog || \ && aws ecr create-repository --repository-name product-catalog
+          aws ecr describe-repositories --repository-names product-reviews || \ && aws ecr create-repository --repository-name product-reviews
+          aws ecr describe-repositories --repository-names prometheus || \ && aws ecr create-repository --repository-name prometheus
+          aws ecr describe-repositories --repository-names quote || \ && aws ecr create-repository --repository-name quote
+          aws ecr describe-repositories --repository-names react-native-app || \ && aws ecr create-repository --repository-name react-native-app
+          aws ecr describe-repositories --repository-names recommendation || \ && aws ecr create-repository --repository-name recommendation
+          aws ecr describe-repositories --repository-names shipping || \ && aws ecr create-repository --repository-name shipping
+
