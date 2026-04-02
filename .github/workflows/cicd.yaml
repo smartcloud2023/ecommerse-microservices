@@ -59,7 +59,7 @@ jobs:
             export $(grep -v '^#' .env | xargs)
 
             services=(
-              image-provider jaeger kafka llm
+              image-provider kafka llm
               load-generator opensearch payment postgresql
               product-catalog product-reviews quote react-native-app
               recommendation shipping
