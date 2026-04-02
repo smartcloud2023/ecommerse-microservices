@@ -52,7 +52,7 @@ jobs:
       - name: Build and push Docker images
         run: |
             # 1. Create the .env file from the GitHub Variable
-            echo "${{ vars.ENV_FILE }}" > .env 
+            echo "${{ vars.ENV_FILE }}" | tr -d '\r' > .env
 
             # 2. Load the variables into the current shell session
             # This allows us to use $OTEL_JAVA_AGENT_VERSION etc. in the docker command
