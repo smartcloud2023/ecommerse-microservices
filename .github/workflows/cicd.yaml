@@ -2,8 +2,10 @@ name: Build All Service Image
 
 on:
   push:
-    paths:
-      - 'src/**'
+    branches:
+      - main
+     
+    
 
 jobs:
   build-cart:
