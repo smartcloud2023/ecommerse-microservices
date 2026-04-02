@@ -51,6 +51,9 @@ jobs:
 
       - name: Build and push Docker images
         run: |
+            echo "${{ vars.ENV_FILE }}" > .env 
+            export $(grep -v '^#' .env | xargs) 
+
             services=(
             accounting ad cart checkout currency email flagd flagd-ui fraud-detection
             frontend frontend-proxy grafana image-provider jaeger kafka llm
@@ -62,6 +65,7 @@ jobs:
             export BUILD_ID=${GITHUB_RUN_NUMBER}
             for service in "${services[@]}"; do
             echo "Building and pushing $service..."
+            cp .env "./src/$service/.env"
             docker build -t "$service:$BUILD_ID" -f "./src/$service/Dockerfile" .
             docker tag "$service:$BUILD_ID" "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
             docker push "${{ steps.login-ecr.outputs.registry }}/$service:$BUILD_ID"
