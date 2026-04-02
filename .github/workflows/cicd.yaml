@@ -59,7 +59,7 @@ jobs:
             export $(grep -v '^#' .env | xargs)
 
             services=(
-              cart checkout currency email flagd flagd-ui fraud-detection
+              cart checkout currency email flagd-ui fraud-detection
               frontend frontend-proxy grafana image-provider jaeger kafka llm
               load-generator opensearch otel-collector payment postgresql
               product-catalog product-reviews prometheus quote react-native-app
@@ -82,6 +82,7 @@ jobs:
                 --build-arg "OTEL_JAVA_AGENT_VERSION=$OTEL_JAVA_AGENT_VERSION" \
                 --build-arg "IMAGE_VERSION=$IMAGE_VERSION" \
                 --build-arg "AD_PORT=$AD_PORT" \
+                --build-arg "OPENTELEMETRY_CPP_VERSION=$OPENTELEMETRY_CPP_VERSION" \
                 -f "./src/$service/Dockerfile" .
 
               # 5. Tag and Push
