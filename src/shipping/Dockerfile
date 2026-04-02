@@ -10,7 +10,8 @@ ARG BUILDPLATFORM
 RUN echo Building on ${BUILDPLATFORM} for ${TARGETPLATFORM}
 
 # Install dependencies - cross-compilation setup for ARM64, native otherwise
-RUN apt-get install --no-install-recommends -y g++ libc6-dev libprotobuf-dev protobuf-compiler ca-certificates;
+RUN apt-get install --no-install-recommends -y g++-aarch64-linux-gnu libc6-dev-arm64-cross libprotobuf-dev protobuf-compiler ca-certificates && \
+         rustup target add aarch64-unknown-linux-gnu;
 # RUN apt-get update && \
 #     if [ "${TARGETPLATFORM}" = "linux/arm64" ] && [ "${BUILDPLATFORM}" != "linux/arm64" ] ; then \
 #         apt-get install --no-install-recommends -y g++-aarch64-linux-gnu libc6-dev-arm64-cross libprotobuf-dev protobuf-compiler ca-certificates && \
@@ -24,7 +25,11 @@ WORKDIR /app/
 COPY ./* /app/
 
 # Build - cross-compile for ARM64 or native build
-RUN cargo build -r;
+RUN env CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc \
+            CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc \
+            CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++ \
+        cargo build -r --target aarch64-unknown-linux-gnu && \
+        cp /app/target/aarch64-unknown-linux-gnu/release/shipping /app/target/release/shipping;
 # RUN if [ "${TARGETPLATFORM}" = "linux/arm64" ] && [ "${BUILDPLATFORM}" != "linux/arm64" ] ; then \
 #         env CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc \
 #             CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc \
