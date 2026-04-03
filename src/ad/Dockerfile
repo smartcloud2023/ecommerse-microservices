@@ -8,7 +8,7 @@ WORKDIR /usr/src/app/
 
 
 
-
+CMD src/ /usr/src/app/
 
 COPY ./src/ad/gradlew* ./src/ad/settings.gradle* ./src/ad/build.gradle ./
 COPY ./src/ad/gradle ./gradle
