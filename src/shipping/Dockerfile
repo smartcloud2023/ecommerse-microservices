@@ -24,6 +24,15 @@ COPY ./* /app/
 COPY ./src/ ./src/
 COPY ./src/shipping/src/shipping_service/ ./src/shipping_service/
 
+RUN echo "=== Current Directory ==="
+RUN pwd
+
+RUN echo "=== App Contents ==="
+RUN ls -la /app
+
+RUN echo "=== Searching Cargo.toml ==="
+RUN find /app -name Cargo.toml
+
 
 # Build - cross-compile for ARM64 or native build
 RUN if [ "${TARGETPLATFORM}" = "linux/arm64" ] && [ "${BUILDPLATFORM}" != "linux/arm64" ] ; then \
