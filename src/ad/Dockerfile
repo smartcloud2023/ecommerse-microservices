@@ -18,7 +18,7 @@ RUN ./gradlew
 RUN ./gradlew downloadRepos
 
 COPY ./* ./
-COPY ./proto/ ./proto
+COPY ./src/ad/proto/ ./proto
 RUN chmod +x ./gradlew
 RUN ./gradlew installDist -PprotoSourceDir=./proto
 
