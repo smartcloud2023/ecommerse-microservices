@@ -86,7 +86,6 @@ RUN if [ "${TARGETPLATFORM}" = "linux/arm64" ] && [ "${BUILDPLATFORM}" != "linux
             CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++ \
         cargo build -r --target aarch64-unknown-linux-gnu && \
         cp /app/target/aarch64-unknown-linux-gnu/release/shipping /app/target/release/shipping && \
-        cp /app/target/aarch64-unknown-linux-gnu/release/healthcheck /app/target/release/healthcheck; \
     else \
         cargo build -r; \
     fi
@@ -97,7 +96,6 @@ FROM gcr.io/distroless/cc-debian13:nonroot@sha256:e1fd250ce83d94603e9887ec991156
 WORKDIR /app
 
 COPY --from=builder /app/target/release/shipping shipping
-COPY --from=builder /app/target/release/healthcheck healthcheck
 
 EXPOSE ${SHIPPING_PORT}
 
