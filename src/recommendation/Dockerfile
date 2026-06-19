@@ -24,7 +24,7 @@ RUN venv/bin/opentelemetry-bootstrap -a install
 
 FROM docker.io/library/python:3.14-alpine3.23
 
-COPY --from=build-venv /venv/ /venv/
+COPY --from=build-venv /app/venv/ /venv/
 
 WORKDIR /app
 
