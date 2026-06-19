@@ -26,7 +26,7 @@ RUN dotnet build "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURAT
 FROM builder AS publish
 ARG TARGETARCH
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false -p:NuGetAudit=false
 
 # -----------------------------------------------------------------------------
 
