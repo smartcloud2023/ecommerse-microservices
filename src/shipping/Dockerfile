@@ -22,7 +22,7 @@ WORKDIR /app/
 
 COPY ./* /app/
 COPY ./src/ ./src/
-COPY ./src/shipping_service/ ./src/shipping_service/
+COPY ./src/shipping/src/shipping_service/ ./src/shipping_service/
 
 
 # Build - cross-compile for ARM64 or native build

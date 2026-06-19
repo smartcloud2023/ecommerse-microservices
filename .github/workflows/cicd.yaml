@@ -66,7 +66,7 @@ jobs:
             # recommendation shipping
             # )
             services=(
-            fraud-detection frontend frontend-proxy image-provider kafka llm
+            load-generator opensearch payment product-catalog product-reviews quote react-native-app recommendation shipping
             )
 
             export BUILD_ID=${GITHUB_RUN_NUMBER}
