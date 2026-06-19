@@ -10,7 +10,7 @@ WORKDIR /usr/src/app/
 
 COPY ./src/ /usr/src/app/
 
-COPY ./gradlew* ./settings.gradle* ./build.gradle ./
+COPY ./src/ad/gradlew* ./src/ad/settings.gradle* ./src/ad/build.gradle ./
 COPY ./src/ad/gradle ./gradle
 
 RUN chmod +x ./gradlew
