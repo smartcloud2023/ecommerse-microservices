@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["./*", "Accounting/"]
 RUN ls -la Accounting
 #RUN mkdir -p Accounting/src/protos && mv proto/demo.proto Accounting/src/protos/demo.proto
-COPY ["./accounting/proto/demo.proto", "Accounting/src/protos/demo.proto"]
+COPY ["src/accounting/proto/demo.proto", "Accounting/src/protos/demo.proto"]
 RUN dotnet restore "./Accounting/Accounting.csproj" -r linux-$TARGETARCH
 WORKDIR "/src/Accounting"
 
