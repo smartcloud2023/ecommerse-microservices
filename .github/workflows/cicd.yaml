@@ -66,7 +66,7 @@ jobs:
             # recommendation shipping
             # )
             services=(
-            checkout currency email
+            flagd-ui fraud-detection frontend frontend-proxy image-provider kafka llm
             )
 
             export BUILD_ID=${GITHUB_RUN_NUMBER}
