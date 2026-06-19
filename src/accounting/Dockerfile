@@ -5,7 +5,7 @@ FROM --platform=${BUILDPLATFORM} mcr.microsoft.com/dotnet/sdk:10.0 AS builder
 ARG TARGETARCH
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["./*", "Accounting/"]
+COPY src/accounting/ Accounting/
 RUN ls -la Accounting
 #RUN mkdir -p Accounting/src/protos && mv proto/demo.proto Accounting/src/protos/demo.proto
 COPY ["src/accounting/proto/demo.proto", "Accounting/src/protos/demo.proto"]
