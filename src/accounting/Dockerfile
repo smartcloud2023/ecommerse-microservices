@@ -12,6 +12,11 @@ COPY ["src/accounting/proto/demo.proto", "Accounting/src/protos/demo.proto"]
 RUN dotnet restore "./Accounting/Accounting.csproj" -r linux-$TARGETARCH
 WORKDIR "/src/Accounting"
 
+RUN pwd
+RUN ls -la
+RUN find /src -name "*.csproj"
+RUN dotnet --info
+
 RUN dotnet build "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURATION -o /app/build
 
 # -----------------------------------------------------------------------------
