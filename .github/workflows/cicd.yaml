@@ -94,7 +94,7 @@ jobs:
                 --build-arg "AD_PORT=$AD_PORT" \
                 --build-arg "OPENTELEMETRY_CPP_VERSION=$OPENTELEMETRY_CPP_VERSION" \
                 --build-arg "OPENSEARCH_IMAGE"="$OPENSEARCH_IMAGE" \
-                -f "./src/$service/Dockerfile" ./src/$service               
+                -f "./src/$service/Dockerfile" .              
               fi
         
 
