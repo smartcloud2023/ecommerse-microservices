@@ -19,7 +19,7 @@ RUN dotnet --info
 
 #RUN dotnet build "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURATION -o /app/build
 
-RUN dotnet build "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURATION -o /app/build -warnaserror:false
+RUN dotnet build "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURATION -o /app/build -p:NoWarn=NU1902
 
 # -----------------------------------------------------------------------------
 
