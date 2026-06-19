@@ -22,6 +22,8 @@ WORKDIR /app/
 
 COPY ./* /app/
 COPY ./src/ ./src/
+COPY ./src/shipping/Cargo.toml ./src/
+COPY ./src/shipping/Cargo.lock ./src/
 COPY ./src/shipping/src/shipping_service/ ./src/shipping_service/
 
 RUN echo "=== Current Directory ==="

@@ -67,7 +67,7 @@ jobs:
             # )
 
             services=(
-            recommendation shipping
+            shipping
             )
 
             export BUILD_ID=${GITHUB_RUN_NUMBER}
