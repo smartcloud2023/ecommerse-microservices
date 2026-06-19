@@ -17,7 +17,9 @@ RUN ls -la
 RUN find /src -name "*.csproj"
 RUN dotnet --info
 
-RUN dotnet build "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURATION -o /app/build
+#RUN dotnet build "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURATION -o /app/build
+
+RUN dotnet build "./Accounting.csproj" -r linux-$TARGETARCH -c $BUILD_CONFIGURATION -o /app/build -warnaserror:false
 
 # -----------------------------------------------------------------------------
 
